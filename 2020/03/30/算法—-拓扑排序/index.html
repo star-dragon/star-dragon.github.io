@@ -6,14 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>StartD</title>
+  <title>算法—-拓扑排序 | StartD</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="StartD">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="[TOC] 前言 &amp;emsp;&amp;emsp;这篇文章是我对于自己学习拓扑排序的一个总结，如果有错的地方请大家见谅。  什么是拓扑排序&amp;emsp;&amp;emsp;这里我就简单的说明一下。拓扑排序就是在有向图中只有出的没有进的点先排除掉。你只要遇到这类的题只要记住这个思想接下来就是空间和时间复杂度的考虑了。（如果你要在深度了解或是看我这个说明不明白的话可以自行百度，百度百科链接） &amp;emsp;&amp;emsp;在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法—-拓扑排序">
+<meta property="og:url" content="http://yoursite.com/2020/03/30/%E7%AE%97%E6%B3%95%E2%80%94-%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/index.html">
 <meta property="og:site_name" content="StartD">
+<meta property="og:description" content="[TOC] 前言 &amp;emsp;&amp;emsp;这篇文章是我对于自己学习拓扑排序的一个总结，如果有错的地方请大家见谅。  什么是拓扑排序&amp;emsp;&amp;emsp;这里我就简单的说明一下。拓扑排序就是在有向图中只有出的没有进的点先排除掉。你只要遇到这类的题只要记住这个思想接下来就是空间和时间复杂度的考虑了。（如果你要在深度了解或是看我这个说明不明白的话可以自行百度，百度百科链接） &amp;emsp;&amp;emsp;在">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-03-30T04:31:46.000Z">
+<meta property="article:modified_time" content="2020-04-03T06:35:17.156Z">
 <meta property="article:author" content="stardragon">
+<meta property="article:tag" content="拓扑排序">
+<meta property="article:tag" content="HDU-2647">
+<meta property="article:tag" content="HDU-3342">
+<meta property="article:tag" content="HDU-4857">
+<meta property="article:tag" content="HDU - 5695">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="StartD" type="application/atom+xml">
@@ -163,16 +172,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-算法—-拓扑排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-算法—-拓扑排序" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/30/%E7%AE%97%E6%B3%95%E2%80%94-%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/">算法—-拓扑排序</a>
+    <h1 class="article-title" itemprop="name">
+      算法—-拓扑排序
     </h1>
   
 
@@ -188,15 +195,292 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+<div id="busuanzi_container_page_pv" style="font - size:16px;color:rgb(153,153,153);line-height:1.8em;">
+总阅读量
+<span id="busuanzi_value_page_pv"></span>次
+</div>
         <p>[TOC]</p>
 <p><strong>前言</strong></p>
 <p>&emsp;&emsp;这篇文章是我对于自己学习拓扑排序的一个总结，如果有错的地方请大家见谅。</p>
 <hr>
 <h1 id="什么是拓扑排序"><a href="#什么是拓扑排序" class="headerlink" title="什么是拓扑排序"></a>什么是拓扑排序</h1><p>&emsp;&emsp;这里我就简单的说明一下。拓扑排序就是在有向图中只有出的没有进的点先排除掉。你只要遇到这类的题只要记住这个思想接下来就是空间和时间复杂度的考虑了。（如果你要在深度了解或是看我这个说明不明白的话可以自行百度，<a href="https://baike.baidu.com/item/%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/5223807?fr=aladdin" target="_blank" rel="noopener">百度百科链接</a>）</p>
 <p>&emsp;&emsp;在一个图中如果你要想排出所有的点，那么只有无环的有向图才可以把所有的点排出去。而且当我们进行拓扑排序的时候，由于大家想法不一样每一个人排出来的顺序都有可能不同。题目就会在这两个方面来进行设题。题目有时不一定会给你有向无环图，而且为了保证答案的唯一性题目会给你一个排序的规则。这时候你必须要看清题目的需求来进行做题。</p>
-        
+<a id="more"></a>
+
+<h1 id="如何实现拓扑排序"><a href="#如何实现拓扑排序" class="headerlink" title="如何实现拓扑排序"></a>如何实现拓扑排序</h1><p>&emsp;&emsp;首先我们要先建立有向图。那么我们肯定要有两个数据：一个表示点，另一个表示点的指向。在这里举一些本人常用的方法，当然具体使用的时候要按照实际的需求来。</p>
+<p>方法一：二维数组。</p>
+<p>用行来表示图上的点，用列表示点的指向。一开始我们用0来填充这个表示图的二维数组。假设点<strong>1</strong>指向点<strong>2</strong>那么我们就可以让<code>a[1][2]=1</code>用这样的方式来表示点<strong>1</strong>指向点<strong>2</strong>。</p>
+<p>方法二：用队列或者栈</p>
+<p>&emsp;&emsp;同样我们也要一个创建一个队列或者栈的数组。我用下标值来表示点。如果点<strong>1</strong>指向点<strong>2</strong>那么我们就向下标为1的数组中插入一个数字2来表示点<strong>1</strong>指向点<strong>2</strong>。</p>
+<p>&emsp;&emsp;这个两个就是我现在经常使用的方法了。第一个方法的时间和空间复杂度都比较大，但是它的想法简单不易错。如果题目需要很大的空间，那么你就要用到第二个方法。</p>
+<p>&emsp;&emsp;建完图后，我们就进行拓扑了。这里我们必须再次谈到拓扑排序的中心思想了——在有向图中只有出的没有进的点先排除掉。那么我们必要先找出来没有进的点。如果我们单纯用图来查找，那么我们会发现这样比较困难。因为你很难表示一个点被排除后接下来满足条件的点怎么来排除和如何表示你这个点已经排出去了。这里我们可以用一个整型数组<strong>b</strong>来表示一个点有多少的进，用另一个整型数组<strong>c</strong>来表示一个点是否被排出去。我们同样用下标来表示点并一开始用0来填充数组<strong>b</strong>和<strong>c</strong>。每次有一个点<strong>A</strong>指向点<strong>B</strong>那么我们就可以进行一个<strong>b[B]++</strong>的操作。每次点<strong>A</strong>被排出去了，那么就将数组<strong>c[A]</strong>设置为1。（当然你可以用布尔型来表示是否排出，只是我在用的时候经常会出错。所以我这里还是建议用一个整型数组来存比较好。那么我数组<strong>c</strong>之所以设0为未被排除是因为我在实际使用memset这个函数的时候设1会出问题。虽然我不知道为什么，但是我多次wa后知道设0比较好。）</p>
+<p>举例：</p>
+<p>&emsp;&emsp;比如我们创建一个数组b来存放图中点的进的个数，那么这里我们还是点<strong>1</strong>指向点<strong>2</strong>。</p>
+<p>这时候我们就让<code>b[2]++</code>。这样<strong>b[2]</strong>就记录了有多少个点指向点2。</p>
+<p><strong>进行拓扑</strong></p>
+<p>&emsp;&emsp;当一切准备就绪就只要从头遍历数组b当遇到<strong>b[i]==0</strong>，那么就表示<strong>i</strong>这个点只有出没有进。这时候我们判断<strong>c[i]</strong>是否为0。如果<strong>c[i]==1</strong>就意味着它已经被排除过了就不要再排除它 了。如果<strong>c[i]==0</strong>就可以把<strong>i</strong>这个点排除出去并把<strong>c[i]</strong>设为1。然后我们遍历二维数组<code>a[i][]</code>。这时候我们判断二维数组是否满足<code>a[i][j]==1</code>.如果满足则把<code>b[j]--</code>。接下来再重新从头遍历一遍直到再也排不了的时候。</p>
+<p>&emsp;&emsp;这里我用c++来演示一下拓扑排序。我这里演示的代码是小的先被排出。这里是输入n和m表示有n个点和接下来输入m行的x和y，用空格隔开表示点x指向点y。</p>
+<p><strong>输入：</strong></p>
+<p>5 4</p>
+<p>1 5</p>
+<p>2 5</p>
+<p>5 4</p>
+<p>5 3</p>
+<p><strong>演示代码：</strong></p>
+<p>（1）二维数组</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;//二维数组的演示</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n, m, a[<span class="number">100</span>][<span class="number">100</span>], x, y,b[<span class="number">100</span>],c[<span class="number">100</span>];</span><br><span class="line">	<span class="keyword">while</span> (<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="keyword">sizeof</span>(a));</span><br><span class="line">		<span class="built_in">memset</span>(b, <span class="number">0</span>, <span class="keyword">sizeof</span>(b));</span><br><span class="line">		<span class="built_in">memset</span>(c, <span class="number">0</span>, <span class="keyword">sizeof</span>(c));</span><br><span class="line">		<span class="comment">//这里先进行初始化</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; x &gt;&gt; y;</span><br><span class="line">			a[x][y] = <span class="number">1</span>;<span class="comment">//表示点x指向y</span></span><br><span class="line">			b[y]++;<span class="comment">//那每次指向y点，数组b都要++</span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)<span class="comment">//我们要排除n个点那么就要循环n次</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++)<span class="comment">//对数组b进行遍历找到b[j]==0的点</span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span> (b[j]==<span class="number">0</span>&amp;&amp;c[j]==<span class="number">0</span>)<span class="comment">//那么如果c[j]==0那么表示j还没被排出去</span></span><br><span class="line">				&#123;</span><br><span class="line">					<span class="built_in">cout</span> &lt;&lt; j &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">					c[j] = <span class="number">1</span>;</span><br><span class="line">					<span class="keyword">for</span> (<span class="keyword">int</span> z = <span class="number">1</span>; z &lt;= n; z++)</span><br><span class="line">					&#123;</span><br><span class="line">						<span class="keyword">if</span> (a[j][z]==<span class="number">1</span>)</span><br><span class="line">						&#123;</span><br><span class="line">							b[z]--;</span><br><span class="line">							<span class="comment">//因为j点被排出去了，那么j点所指向的点都要减1</span></span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（2）队列</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q[<span class="number">100</span>], qt;</span><br><span class="line">	<span class="keyword">int</span> n, m, x, y, b[<span class="number">100</span>], c[<span class="number">100</span>];</span><br><span class="line">	<span class="keyword">while</span> (<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">memset</span>(b, <span class="number">0</span>, <span class="keyword">sizeof</span>(b));</span><br><span class="line">		<span class="built_in">memset</span>(c, <span class="number">0</span>, <span class="keyword">sizeof</span>(c));</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; x &gt;&gt; y;</span><br><span class="line">			q[x].push(y);</span><br><span class="line">			b[y]++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (b[i]==<span class="number">0</span>&amp;&amp;c[i]==<span class="number">0</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				c[i] = <span class="number">1</span>;</span><br><span class="line">				qt.push(i);</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">int</span> t;</span><br><span class="line">		<span class="keyword">while</span> (!qt.empty())</span><br><span class="line">		&#123;</span><br><span class="line">			t = qt.front();</span><br><span class="line">			<span class="keyword">while</span> (!q[t].empty())</span><br><span class="line">			&#123;</span><br><span class="line">				b[q[t].front()]--;</span><br><span class="line">				q[t].pop();</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span> (b[i] == <span class="number">0</span> &amp;&amp; c[i] == <span class="number">0</span>)</span><br><span class="line">				&#123;</span><br><span class="line">					c[i] = <span class="number">1</span>;</span><br><span class="line">					qt.push(i);</span><br><span class="line">					<span class="built_in">cout</span> &lt;&lt; i &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			qt.pop();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其实无论是队列还是二维数组都是遵循着拓扑排序的中心思想——没有进只有出的点先被排出。</p>
+<h1 id="关于拓扑排序的题目"><a href="#关于拓扑排序的题目" class="headerlink" title="关于拓扑排序的题目"></a>关于拓扑排序的题目</h1><p>这里我直接讲实例。不过前面要照护到刚刚学习的人所以会讲的尽量细致因此字数也会多。</p>
+<hr>
+<h2 id="HDU-2647-Reward"><a href="#HDU-2647-Reward" class="headerlink" title="HDU - 2647 Reward"></a><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2647" target="_blank" rel="noopener">HDU - 2647 Reward</a></h2><p>Problem Description</p>
+<p>Dandelion’s uncle is a boss of a factory. As the spring festival is coming , he wants to distribute rewards to his workers. Now he has a trouble about how to distribute the rewards.<br>The workers will compare their rewards ,and some one may have demands of the distributing of rewards ,just like a’s reward should more than b’s.Dandelion’s unclue wants to fulfill all the demands, of course ,he wants to use the least money.Every work’s reward will be at least 888 , because it’s a lucky number.</p>
+<p>Input</p>
+<p>One line with two integers n and m ,stands for the number of works and the number of demands .(n&lt;=10000,m&lt;=20000)<br>then m lines ,each line contains two integers a and b ,stands for a’s reward should be more than b’s.</p>
+<p>Output</p>
+<p>For every case ,print the least money dandelion ‘s uncle needs to distribute .If it’s impossible to fulfill all the works’ demands ,print -1.</p>
+<p>Sample Input</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">2 1</span><br><span class="line">1 2</span><br><span class="line">2 2</span><br><span class="line">1 2</span><br><span class="line">2 1</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>Sample Output</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1777</span><br><span class="line">-1</span><br></pre></td></tr></table></figure>
+
+<p>中文翻译：</p>
+<p>问题描述</p>
+<p>蒲公英的叔叔是一家工厂的老板。春节快到了，他想给工人们发奖金。现在他面临着如何分配奖金的难题。</p>
+<p>工人们会比较他们的报酬，有些人可能会有分配报酬的要求，就像a的报酬应该比b的多。蒲公英的无知想要满足所有的需求，当然，他想用最少的钱。每个工作的奖励至少是888，因为这是一个幸运数字。</p>
+<p>输入</p>
+<p>其中一行有两个整数n和m，表示作品的数量和需求的数量。(n&lt;=10000,m&lt;=20000)</p>
+<p>那么m行，每一行包含两个整数a和b，代表a的奖励应该比b的多。</p>
+<p>输出</p>
+<p>对于每种情况，打印蒲公英的叔叔需要分配的最少的钱。如果不可能满足所有的工作要求，打印-1。</p>
+<p>（翻译使用有道翻译）</p>
+<p><strong>对于Reward题目的分析：</strong></p>
+<p>&emsp;&emsp;首先我们要知道题目要我们干什么。从题意上看，就是给我们一堆数据让我们建立一个图来表示工厂工人之间的工资关系。最终输出工厂老板最少要给多少的工资或者老板不能满足所有需求输出一个负一。</p>
+<p>&emsp;&emsp;不管怎么样只要做拓扑排序那么我们必定是要先建图。这时候我们要看到题目最大要一万个工人和两万个需求。你要是用二维数组必然时间和空间复杂度都不允许。所以你只能用其他的方法。反正我用队列（很多人使用vertor这个头文件来做，但是我队列用习惯了。反正对于这题来说它们是一样的）。这里我们还要注意一件事情那就是老板不一定能满足所有工人的需求。这个也就是说题目的所建的图不一定是有向无环图。因此我们要用一个计数的变量<strong>count</strong>来表示一共排出了多少点。如果变量<strong>count</strong>等于工人数就意味着全部的点都排出去了，那我们就把我们计算出来的钱数输出出去否则就要输出负一。</p>
+<p>&emsp;&emsp;图建完后，并且我们也把有向无环图的判断搞定了。因为我们还需要计算老板要给多少钱，所以我们再用一个变量来存放他们多的钱数。那么最低级的工人肯定多的钱数是0.比他高一级的就是1。而且这个钱数必然要和所对应的点挂钩。所以你可以用一个新开一个数组来存放多的钱数。不过你要是去看其他人对这题的做法基本上都是用一个结构体来做这题（用结构体不容易错）。结构体的建立如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> num, value;<span class="comment">//num表示点，value表示多的钱数</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;最后就是输出。如果满足<strong>count</strong>等于工人数的条件，我们只要把所有的<strong>value</strong>相加并再加上工人数*888否则就输出负一。</p>
+<p><strong>AC代码展示</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> num, value;<span class="comment">//num表示点，value表示多的钱数</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n, m, x, y;</span><br><span class="line">	<span class="keyword">while</span> (<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q[<span class="number">10005</span>];<span class="comment">//建图用的，最好在循环里建。</span></span><br><span class="line">		<span class="keyword">int</span> a[<span class="number">10005</span>];<span class="comment">//用来记录是否被排除</span></span><br><span class="line">		Node t, t1;</span><br><span class="line">		<span class="built_in">queue</span>&lt;Node&gt; qn;<span class="comment">//保存已经被排除的点，并记录下它们对应的value</span></span><br><span class="line">		<span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="keyword">sizeof</span>(a));<span class="comment">//初始化</span></span><br><span class="line">		<span class="keyword">int</span> count = <span class="number">0</span>;<span class="comment">//用来记录被排除了多少个</span></span><br><span class="line">		<span class="keyword">long</span> <span class="keyword">long</span> sum = <span class="number">0</span>;<span class="comment">//用来记录总工资，因为工人数多所以我直接开long long</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; x &gt;&gt; y;</span><br><span class="line">			q[y].push(x);</span><br><span class="line">			a[x]++;</span><br><span class="line">		&#125;<span class="comment">//建图</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)<span class="comment">//我们一定要找到所有的一开始就可以被排出的点，以便于它们后一级的value更好计算。</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (a[i] == <span class="number">0</span>)<span class="comment">//先找到可以被排的点</span></span><br><span class="line">			&#123;</span><br><span class="line">				sum += <span class="number">888</span>;<span class="comment">//工人的基本工资可以在这直接加，或者最后来一个工人数*888也是可以的。</span></span><br><span class="line">				t.num = i;</span><br><span class="line">				t.value = <span class="number">0</span>;<span class="comment">//第一个被排的工人必然多钱数是0了。</span></span><br><span class="line">				qn.push(t);</span><br><span class="line">				count++;<span class="comment">//记录被排了多少个点</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">while</span> (!qn.empty() &amp;&amp; count &lt;= n)<span class="comment">//进行一个优化，显然当count==n时，所有的点就都找到了。</span></span><br><span class="line">		&#123;</span><br><span class="line">			t1 = qn.front();</span><br><span class="line">			qn.pop();</span><br><span class="line">			<span class="keyword">while</span> (!q[t1.num].empty())</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">int</span> h = q[t1.num].front();</span><br><span class="line">				a[h]--;</span><br><span class="line">				q[t1.num].pop();</span><br><span class="line">				<span class="keyword">if</span> (a[h] == <span class="number">0</span>)</span><br><span class="line">				&#123;</span><br><span class="line">					t.num = h;</span><br><span class="line">					t.value = t1.value + <span class="number">1</span>;<span class="comment">//后面被排出的点必然比他的前一级的value高1</span></span><br><span class="line">					sum += <span class="number">888</span> + t.value;</span><br><span class="line">					count++;</span><br><span class="line">					qn.push(t);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (count != n)<span class="comment">//判断是否count等于工人数</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"-1"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; sum &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="HDU-3342-Legal-or-Not"><a href="#HDU-3342-Legal-or-Not" class="headerlink" title="HDU- 3342 Legal or Not"></a><a href="http://acm.hdu.edu.cn/showproblem.php?pid=3342" target="_blank" rel="noopener">HDU- 3342 Legal or Not</a></h2><p>Problem Description</p>
+<p>ACM-DIY is a large QQ group where many excellent acmers get together. It is so harmonious that just like a big family. Every day,many “holy cows” like HH, hh, AC, ZT, lcc, BF, Qinz and so on chat on-line to exchange their ideas. When someone has questions, many warm-hearted cows like Lost will come to help. Then the one being helped will call Lost “master”, and Lost will have a nice “prentice”. By and by, there are many pairs of “master and prentice”. But then problem occurs: there are too many masters and too many prentices, how can we know whether it is legal or not?</p>
+<p>We all know a master can have many prentices and a prentice may have a lot of masters too, it’s legal. Nevertheless，some cows are not so honest, they hold illegal relationship. Take HH and 3xian for instant, HH is 3xian’s master and, at the same time, 3xian is HH’s master,which is quite illegal! To avoid this,please help us to judge whether their relationship is legal or not. </p>
+<p>Please note that the “master and prentice” relation is transitive. It means that if A is B’s master ans B is C’s master, then A is C’s master.</p>
+<p>Input</p>
+<p>The input consists of several test cases. For each case, the first line contains two integers, N (members to be tested) and M (relationships to be tested)(2 &lt;= N, M &lt;= 100). Then M lines follow, each contains a pair of (x, y) which means x is y’s master and y is x’s prentice. The input is terminated by N = 0.<br>TO MAKE IT SIMPLE, we give every one a number (0, 1, 2,…, N-1). We use their numbers instead of their names.</p>
+<p>Output</p>
+<p>For each test case, print in one line the judgement of the messy relationship.<br>If it is legal, output “YES”, otherwise “NO”.</p>
+<p>Sample Input</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">3 2</span><br><span class="line">0 1</span><br><span class="line">1 2</span><br><span class="line">2 2</span><br><span class="line">0 1</span><br><span class="line">1 0</span><br><span class="line">0 0</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>Sample Output</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">YES</span><br><span class="line">NO</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>Author</p>
+<p>QiuQiu@NJFU</p>
+<p>中文翻译：</p>
+<p>问题描述</p>
+<p>ACM-DIY是一个大型的QQ群，许多优秀的acm爱好者都聚集在这里。它是如此和谐，就像一个大家庭。每天，许多“牛”像HH, HH, AC, ZT, lcc, BF, Qinz等聊天在线交流他们的想法。当有人有问题的时候，很多像迷路一样的牛都会来帮忙。然后，被帮助的人会称迷失的“主人”，迷失将有一个很好的“普伦蒂斯”。不久，有许多对“师傅和徒弟”。但问题出现了，有太多的师傅和学徒，我们怎么知道它是否合法呢?</p>
+<p>我们都知道师傅可以有很多学徒，学徒也可以有很多师傅，这是合法的。然而，有些奶牛并不诚实，它们有不合法的关系。以HH和3xian为例，HH是3xian的师傅，同时3xian是HH的师傅，这是违法的!为了避免这种情况，请帮助我们判断他们的关系是否合法。</p>
+<p>请注意“师傅和徒弟”的关系是可传递的。这意味着如果A是B的主人，B是C的主人，那么A就是C的主人。</p>
+<p>输入</p>
+<p>输入由几个测试用例组成。对于每种情况，第一行包含两个整数，N(要测试的成员)和M(要测试的关系)(2 &lt;= N, M &lt;= 100)。然后是M行，每一行包含一对(x, y) x是y的主格，y是x的徒弟。输入被N = 0终止。</p>
+<p>简单地说，我们给每个数一个数字(0、1、2、…)n - 1)。我们用他们的号码而不是他们的名字。</p>
+<p>输出</p>
+<p>对于每个测试用例，打印一行混乱关系的判断。</p>
+<p>如果是合法的，输出“YES”，否则输出“NO”。</p>
+<p>（翻译使用有道翻译）</p>
+<p><strong>对于Legal or Not题目的分析：</strong></p>
+<p>&emsp;&emsp;首先我们要知道这是让我们判断一个关系是否正常。那么关系这东西一般就是图了。那么我们从题目中看到一个正常的关系就是不存在类似“A是B的师傅，B是C的师傅，C是A的师傅”这样的关系。我们用图的话来说就是这个图中不能存在环。然后你又要表明师傅和徒弟之间的关系，则这个图必是有向图。那我们分析到这里就很明了了，题目就是要我们判断它给我们的数据是否为有向无环图。</p>
+<p>&emsp;&emsp;如果一个如是有向的无环图，那它必然会被拓扑排序排除全部的点。那么也就是说只要排除点的数目<strong>count==n</strong>我们可以输出<strong>YES</strong>反之输出<strong>NO</strong>。我们再来看这题的数据，我们发现题目中的<strong>n</strong>最大才为100。这也意味着，这个题目我们可以使用二维数组。但是你们可能会想为什么不用我之前说的队列呢？第一数据不大，我们用二维数组比较直观。第二因为数据不大，所以题目中可能会出现重复数据。这个重复数据虽然不会对我们的建图产生影响，但是它影响你记录一个点的被指向数。</p>
+<p>比如：数据0&nbsp;1，0&nbsp;1</p>
+<p>你用数组b来记录一个点的被指向数。数组a来建图。</p>
+<p>第一个0&nbsp;1输入的时候,<strong>a[0][1]=1</strong>，<strong>b[1]++</strong></p>
+<p>第二个0&nbsp;1输入的时候你的<strong>a[0][1]</strong>原本就是1了，再让它等于1又不会出问题。但是你的<strong>b[1]</strong>就重复加了。</p>
+<p>因此我们需要对这个进行判断，防止有重复的数据。这也是为什么很多人在数据大的时候用<strong>vector</strong>，因为数据大也有可能题目给你重复数据。而<strong>vector</strong>会比队列有这更好的函数去查找重复值。</p>
+<p><strong>AC代码展示</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a[<span class="number">101</span>][<span class="number">101</span>], n, m, x, y, v[<span class="number">101</span>], b[<span class="number">101</span>];</span><br><span class="line">	<span class="keyword">while</span> (<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m&amp;&amp;n!=<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="keyword">sizeof</span>(a));</span><br><span class="line">		<span class="built_in">memset</span>(b, <span class="number">0</span>, <span class="keyword">sizeof</span>(b));</span><br><span class="line">		<span class="built_in">memset</span>(v, <span class="number">0</span>, <span class="keyword">sizeof</span>(v));</span><br><span class="line">		<span class="comment">//初始化</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; x &gt;&gt; y;</span><br><span class="line">			<span class="keyword">if</span> (a[x][y]==<span class="number">0</span>)<span class="comment">//防止重复数据使得b[y]重复加</span></span><br><span class="line">			&#123;</span><br><span class="line">				a[x][y] = <span class="number">1</span>;<span class="comment">//表示x是y的师傅</span></span><br><span class="line">				b[y]++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">		<span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)<span class="comment">//找到最强的师傅，即只有出没有进的点</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (b[i]==<span class="number">0</span>&amp;&amp;v[i]==<span class="number">0</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				q.push(i);</span><br><span class="line">				v[i] = <span class="number">1</span>;<span class="comment">//设其为一表示已经排除</span></span><br><span class="line">				count++;<span class="comment">//累加已排出的点</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">while</span> (!q.empty()&amp;&amp;count&lt;=n)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> t = q.front();</span><br><span class="line">			q.pop();</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span> (a[t][i]==<span class="number">1</span>)</span><br><span class="line">				&#123;</span><br><span class="line">					b[i]--;</span><br><span class="line">					<span class="keyword">if</span> (b[i]==<span class="number">0</span>&amp;&amp;v[i]==<span class="number">0</span>)</span><br><span class="line">					&#123;</span><br><span class="line">						q.push(i);</span><br><span class="line">						count++;</span><br><span class="line">						v[i] = <span class="number">1</span>;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> (count==n)<span class="comment">//如果是一个正常的关系那么必定所有的点都被排除出去</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"YES"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"NO"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="HDU-4857-逃生"><a href="#HDU-4857-逃生" class="headerlink" title="HDU - 4857 逃生"></a><strong><a href="http://acm.hdu.edu.cn/showproblem.php?pid=4857" target="_blank" rel="noopener">HDU - 4857 逃生</a></strong></h2><p>Problem Description</p>
+<p>糟糕的事情发生啦，现在大家都忙着逃命。但是逃命的通道很窄，大家只能排成一行。</p>
+<p>现在有n个人，从1标号到n。同时有一些奇怪的约束条件，每个都形如：a必须在b之前。<br>同时，社会是不平等的，这些人有的穷有的富。1号最富，2号第二富，以此类推。有钱人就贿赂负责人，所以他们有一些好处。</p>
+<p>负责人现在可以安排大家排队的顺序，由于收了好处，所以他要让1号尽量靠前，如果此时还有多种情况，就再让2号尽量靠前，如果还有多种情况，就让3号尽量靠前，以此类推。</p>
+<p>那么你就要安排大家的顺序。我们保证一定有解。</p>
+<p>Input</p>
+<p>第一行一个整数T(1 &lt;= T &lt;= 5),表示测试数据的个数。<br>然后对于每个测试数据，第一行有两个整数n(1 &lt;= n &lt;= 30000)和m(1 &lt;= m &lt;= 100000)，分别表示人数和约束的个数。</p>
+<p>然后m行，每行两个整数a和b，表示有一个约束a号必须在b号之前。a和b必然不同。</p>
+<p>Output</p>
+<p>对每个测试数据，输出一行排队的顺序，用空格隔开。</p>
+<p>Sample Input</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">5 10</span><br><span class="line">3 5</span><br><span class="line">1 4</span><br><span class="line">2 5</span><br><span class="line">1 2</span><br><span class="line">3 4</span><br><span class="line">1 4</span><br><span class="line">2 3</span><br><span class="line">1 5</span><br><span class="line">3 5</span><br><span class="line">1 2</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>Sample Output</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 2 3 4 5</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>Author</p>
+<p>CLJ</p>
+<p><strong>对于此题——“逃生”的题目分析</strong></p>
+<p>&emsp;&emsp;这题目要是你不认真去分析，你可能就会想拓扑排序加降序输出。但是这题题目设坑就设在这句话“要让1号尽量靠前，如果此时还有多种情况，就再让2号尽量靠前，如果还有多种情况，就让3号尽量靠前，以此类推。”这句话就是告诉我们，这个不是简单的拓扑+降序输出。我一开始也没有想到直到看到这位大哥的解说（<a href="https://www.cnblogs.com/dyhaohaoxuexi/p/12544390.html" target="_blank" rel="noopener">链接</a>），我才AC的。</p>
+<p>&emsp;&emsp;如果你们没有想去看那位大哥的解说。那就由我再来给你们分析一下吧。为了满足题目的要求，那么我们必须是反向建图+升序队列反向输出。这是因为题目要求你尽量让1在前面。你可能会想那我直接降序输出不就好了。这里我把那位大哥给的数据展示一下：</p>
+<p>1</p>
+<p>6 4</p>
+<p>6 3</p>
+<p>3 1</p>
+<p>5 4</p>
+<p>4 2</p>
+<p>如果你就按照降序输出来输出的就是5&nbsp;4&nbsp;2&nbsp;6&nbsp;3&nbsp;1。按照题目的要求，你要尽量使1在2的前面。这组输出明显不符合题意。那符合题意的数据应该是6&nbsp;3&nbsp;1&nbsp;5&nbsp;4&nbsp;2。你看这两个数据是不是就是让5&nbsp;4&nbsp;2和6&nbsp;3&nbsp;1这两个块互换。那我们分析一下，数据所建出来的图应该是6<del>&gt;3</del>&gt;1和5<del>&gt;4</del>&gt;2。按照拓扑排序来说我们可以先排出6或5。如果我们先排出6，那么排完后我们又可以排除3或是5。以此类推。你们这时候或许有一个疑惑，为什么我们不先排出5呢？我们首先是要尽量让1排在2的前面。那也就是说，我们要先排除1。你若要先排除1就要把1之前的先排除掉之后再考虑其他的。那为什么我们要反向建图呢？按照之前的分析，我们必先要先把1之前的点都输出后再排除剩下点中的最小值之前的点都排掉。你可以想一下你用反向建图的时候，当你的<strong>qt</strong>为1的时候，按照拓扑排序的代码你必然是把1之后可以排除的点都排出去也就是说比1早走的点都走了。因为我们使用了反向建图导致它的输出是反着的，所以我们的输出也必须反着来。那为什么我们又要用一个升序的优先队列<strong>qt</strong>来预先存放排除点呢？那么你想我们用反向输出，那么是不是1越晚进入<strong>qt</strong>也就意味着它越早输出1之前的点也越早输出。</p>
+<p>&emsp;&emsp;我说了这么多可能有点乱因为这题的确有点难度。如果你还不明白的话可以去看那位大哥的（<a href="https://www.cnblogs.com/dyhaohaoxuexi/p/12544390.html" target="_blank" rel="noopener">链接</a>）。如果还是不明白的话，你还是自己多想想吧。</p>
+<p>&emsp;&emsp;接下来就是和上面的分析差不多了。建图拓扑就结束了。</p>
+<p><strong>AC代码展示：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> T, n, m, a, b;</span><br><span class="line">	<span class="keyword">while</span> (~<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;T))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">while</span> (T--)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;n, &amp;m);</span><br><span class="line">			<span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q[<span class="number">30005</span>];</span><br><span class="line">			<span class="keyword">int</span> v[<span class="number">30005</span>], c[<span class="number">30005</span>];</span><br><span class="line">			<span class="built_in">memset</span>(c, <span class="number">0</span>, <span class="keyword">sizeof</span>(c));</span><br><span class="line">			<span class="built_in">memset</span>(v, <span class="number">0</span>, <span class="keyword">sizeof</span>(v));</span><br><span class="line">			<span class="comment">//初始化</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;a, &amp;b);</span><br><span class="line">				q[b].push(a);<span class="comment">//反向建图</span></span><br><span class="line">				c[a]++;</span><br><span class="line">			&#125;</span><br><span class="line">			priority_queue&lt;<span class="keyword">int</span>&gt; qt;<span class="comment">//设置降序优先队列</span></span><br><span class="line">			<span class="built_in">stack</span>&lt;<span class="keyword">int</span>&gt; os;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span> (c[i] == <span class="number">0</span>)</span><br><span class="line">				&#123;</span><br><span class="line">					qt.push(i);</span><br><span class="line">					v[i] = <span class="number">1</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">while</span> (!qt.empty())</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">int</span> t = qt.top();</span><br><span class="line">				qt.pop();</span><br><span class="line">				os.push(t);<span class="comment">//用栈存先进后出</span></span><br><span class="line">				<span class="keyword">while</span> (!q[t].empty())</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">int</span> t1 = q[t].front();</span><br><span class="line">					q[t].pop();</span><br><span class="line">					c[t1]--;</span><br><span class="line">					<span class="keyword">if</span> (c[t1] == <span class="number">0</span> &amp;&amp; v[t1] == <span class="number">0</span>)</span><br><span class="line">					&#123;</span><br><span class="line">						qt.push(t1);</span><br><span class="line">						v[t1] = <span class="number">1</span>;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">bool</span> f = <span class="literal">false</span>;</span><br><span class="line">			<span class="keyword">while</span> (!os.empty())</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span> (f)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="built_in">cout</span> &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="built_in">cout</span> &lt;&lt; os.top();</span><br><span class="line">				os.pop();</span><br><span class="line">				f = <span class="literal">true</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="HDU-5695-Gym-Class"><a href="#HDU-5695-Gym-Class" class="headerlink" title="HDU - 5695 Gym Class"></a><a href="http://acm.hdu.edu.cn/showproblem.php?pid=5695" target="_blank" rel="noopener">HDU - 5695 Gym Class</a></h2><p>Problem Description</p>
+<p>众所周知，度度熊喜欢各类体育活动。</p>
+<p>今天，它终于当上了梦寐以求的体育课老师。第一次课上，它发现一个有趣的事情。在上课之前，所有同学要排成一列， 假设最开始每个人有一个唯一的ID，从1到N，在排好队之后，每个同学会找出包括自己在内的前方所有同学的最小ID，作为自己评价这堂课的分数。麻烦的是，有一些同学不希望某个（些）同学排在他（她）前面，在满足这个前提的情况下，新晋体育课老师——度度熊，希望最后的排队结果可以使得所有同学的评价分数和最大。</p>
+<p>Input</p>
+<p>第一行一个整数T，表示T(1≤T≤30) 组数据。</p>
+<p>对于每组数据，第一行输入两个整数N和M(1≤N≤100000,0≤M≤100000)，分别表示总人数和某些同学的偏好。</p>
+<p>接下来M行，每行两个整数A 和B(1≤A,B≤N)，表示ID为A的同学不希望ID为B的同学排在他（她）之前。你可以认为题目保证至少有一种排列方法是符合所有要求的。</p>
+<p>Output</p>
+<p>对于每组数据，输出最大分数 。</p>
+<p>Sample Input</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">1 0</span><br><span class="line">2 1</span><br><span class="line">1 2</span><br><span class="line">3 1</span><br><span class="line">3 1</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>Sample Output</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">6</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>Source</p>
+<p><a href="http://acm.hdu.edu.cn/search.php?field=problem&key=2016%26quot%3B%B0%D9%B6%C8%D6%AE%D0%C7%26quot%3B+-+%B3%F5%C8%FC%A3%A8Astar+Round2A%A3%A9&source=1&searchmode=source" target="_blank" rel="noopener">2016”百度之星” - 初赛（Astar Round2A）</a></p>
+<p><strong>对于此题——“Gym Class”的题目分析</strong> </p>
+<p>&emsp;&emsp;<strong>题意</strong>：题目就是要你排一个队伍，使得队伍中所有人评分相加的值的最大。队伍中评分计算是按照这个人和这个人前面的人中评分最低作为这个人的分数。</p>
+<p>例子：</p>
+<p>队伍排序为：3&nbsp;2&nbsp;1。</p>
+<p>对于3来说，它前面没有人，那么自然评分就是它自己。</p>
+<p>对于2来说，它的前面有3。但是它自己的序号是2比3小。所以按照评分的规则它的评分只能是2。</p>
+<p>对于1来说，它的前面有3和2。但是它的序号是在1，2，3中是最小的。所以按照评分的规则它的评分只能是2。</p>
+<p>&emsp;&emsp;故队伍的总评分为3+2+1=6。这个也是题目给的案例中的最后一例所建的队伍。</p>
+<p>&emsp;&emsp; 题意我已经讲明了，但是这个题目到底应该怎么做呢?</p>
+<p>&emsp;&emsp;我们再看看评分的规则：每个同学会找出包括自己在内的前方所有同学的最小ID。而我们需要做出来的是最大的总评分，也就是只要每一个同学得到最大的评分那么我们自然就可以得到最大的总评分。那么为了要每一个同学都得到最大的总评分，则他们的评分最好就是自己。那为了得到这样的结果只要前面的数比它自身大就好了。这就需要我们尽可能把大的数排在前面。这时候你就需要来一个大数优先队列来排。</p>
+<p>&emsp;&emsp;可能你现在还是有点不明白为什么我们要选择大数优先队列来存储。这里我举个例子看你能不能理解（如果你已经理解了，那你可以直接去看<strong>AC代码展示</strong>了）。</p>
+<p>例子：</p>
+<p>1</p>
+<p>3&nbsp;1</p>
+<p>3&nbsp;1</p>
+<p>第一行表示有几个队伍。</p>
+<p>第二行第一个数字表示有3个人，第二个数字表示只有一个关系。</p>
+<p>第三行表示3要在1的前面。</p>
+<p>那么你已经知道1和3的排列。但是你还要想一下2应该放在那里。</p>
+<p>那么会有以下的排列可能：</p>
+<p>2&nbsp;3&nbsp;1&nbsp;总评分为5</p>
+<p>3&nbsp;2&nbsp;1&nbsp;总评分为6</p>
+<p>3&nbsp;1&nbsp;2&nbsp;总评分为5</p>
+<p>那么你会发现只有2在3后面的时候总评才会最大。也就是说在满足条件的情况下只有让越大的数放在越前面则总评越大。因为这样对应的数才越可能是它自己。</p>
+<p>&emsp;&emsp;解题做法：拓扑排序+大数优先队列。</p>
+<p><strong>AC代码展示：</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;climits&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q[<span class="number">100010</span>];<span class="comment">//建图表示的点</span></span><br><span class="line"><span class="keyword">int</span> a[<span class="number">100010</span>];<span class="comment">//记录点的进入值</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n, m, T, x, y, minn, count;</span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> sum;</span><br><span class="line">	<span class="keyword">while</span> (<span class="built_in">cin</span> &gt;&gt; T)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">while</span> (T--)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;n, &amp;m);</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; i++)</span><br><span class="line">			&#123;</span><br><span class="line">				a[i] = <span class="number">0</span>;</span><br><span class="line">			&#125;<span class="comment">//初始化</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">scanf</span>(<span class="string">"%d %d"</span>, &amp;x, &amp;y);</span><br><span class="line">				q[x].push(y);</span><br><span class="line">				a[y]++;</span><br><span class="line">			&#125;<span class="comment">//建图</span></span><br><span class="line">			priority_queue&lt;<span class="keyword">int</span>&gt; Q;<span class="comment">//大数优先队列</span></span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span> (a[i] == <span class="number">0</span>)</span><br><span class="line">				&#123;</span><br><span class="line">					Q.push(i);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			minn = Q.top();<span class="comment">//第一个数的的评分必是它自己</span></span><br><span class="line">			sum = <span class="number">0</span>;</span><br><span class="line">			count = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">while</span> (!Q.empty())</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span> (count == n)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;<span class="comment">//防止死循环，主要是我交G++的时候一直MLO不过我用c++交就过了</span></span><br><span class="line">				<span class="keyword">int</span> t = Q.top();</span><br><span class="line">				Q.pop();</span><br><span class="line">				<span class="keyword">if</span> (minn &gt; t)</span><br><span class="line">				&#123;</span><br><span class="line">					minn = t;</span><br><span class="line">				&#125;<span class="comment">//更新最小值</span></span><br><span class="line">				sum = sum + minn;</span><br><span class="line">				<span class="keyword">while</span> (!q[t].empty())</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">int</span> t1 = q[t].front();</span><br><span class="line">					q[t].pop();</span><br><span class="line">					a[t1]--;</span><br><span class="line">					<span class="keyword">if</span> (a[t1] == <span class="number">0</span>)</span><br><span class="line">					&#123;</span><br><span class="line">						Q.push(t1);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				count++;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; sum &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="HDU-1285"><a href="#HDU-1285" class="headerlink" title="HDU - 1285"></a><a href="http://acm.hdu.edu.cn/showproblem.php?pid=1285" target="_blank" rel="noopener">HDU - 1285</a></h2><p>Problem Description</p>
+<p>有N个比赛队（1&lt;=N&lt;=500），编号依次为1，2，3，。。。。，N进行比赛，比赛结束后，裁判委员会要将所有参赛队伍从前往后依次排名，但现在裁判委员会不能直接获得每个队的比赛成绩，只知道每场比赛的结果，即P1赢P2，用P1，P2表示，排名时P1在P2之前。现在请你编程序确定排名。</p>
+<p>Input</p>
+<p>输入有若干组，每组中的第一行为二个数N（1&lt;=N&lt;=500），M；其中N表示队伍的个数，M表示接着有M行的输入数据。接下来的M行数据中，每行也有两个整数P1，P2表示即P1队赢了P2队。</p>
+<p>Output</p>
+<p>给出一个符合要求的排名。输出时队伍号之间有空格，最后一名后面没有空格。</p>
+<p>其他说明：符合条件的排名可能不是唯一的，此时要求输出时编号小的队伍在前；输入数据保证是正确的，即输入数据确保一定能有一个符合要求的排名。</p>
+<p>Sample Input</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">4 3</span><br><span class="line">1 2</span><br><span class="line">2 3</span><br><span class="line">4 3</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>Sample Output</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 2 4 3</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>Author</p>
+<p>SmallBeer(CML)</p>
+<p>Source</p>
+<p><a href="http://acm.hdu.edu.cn/search.php?field=problem&key=%BA%BC%B5%E7ACM%BC%AF%D1%B5%B6%D3%D1%B5%C1%B7%C8%FC%A3%A8VII%A3%A9&source=1&searchmode=source" target="_blank" rel="noopener">杭电ACM集训队训练赛（VII）</a></p>
+<p>Recommend</p>
+<p>lcy</p>
+<p><strong>对于此题——“确定比赛名次”的题目分析</strong> </p>
+<p>&emsp;&emsp;这一题并不是特别的难，你只要注意好题目的坑然后用拓扑排序就可以了。</p>
+<p>&emsp;&emsp;本题的题目坑在于输出，前面都是简单的建图就结束了。这题难点就在输出上。输出的第一个条件是“最后一名后面没有空格”。第二个条件是“要求输出时编号小的队伍在前”。这条件也就是说你的输出最后要没有空格且尽量小号在前面。所有这题就要用到小数优先队列加上拓扑排序。</p>
+<p>&emsp;&emsp;当然我说过这题并不是特别难，你也可以从头开始遍历找到满足需求的点输出并将它所连的线排除后再从头开始遍历做上面的步骤直到所有的点排出。代码展示的就是不用优先队列的做法。不过优先队列的想法会更加简单。</p>
+<p><strong>AC代码展示</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a[<span class="number">505</span>][<span class="number">505</span>], b[<span class="number">505</span>];<span class="comment">//a为建图用点，b为记录点的进数</span></span><br><span class="line">	<span class="keyword">int</span> n, m, x, y;</span><br><span class="line">	<span class="keyword">while</span> (<span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">memset</span>(a, <span class="number">0</span>, <span class="keyword">sizeof</span>(a));</span><br><span class="line">		<span class="built_in">memset</span>(b, <span class="number">0</span>, <span class="keyword">sizeof</span>(b));<span class="comment">//初始化</span></span><br><span class="line">		<span class="keyword">while</span> (m--)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; x &gt;&gt; y;</span><br><span class="line">			<span class="keyword">if</span> (a[x - <span class="number">1</span>][y - <span class="number">1</span>] == <span class="number">0</span>)<span class="comment">//防止多余的数据</span></span><br><span class="line">			&#123;</span><br><span class="line">				a[x - <span class="number">1</span>][y - <span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">				b[y - <span class="number">1</span>]++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">bool</span> f = <span class="literal">false</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span> (b[j] == <span class="number">0</span>)</span><br><span class="line">				&#123;</span><br><span class="line">					<span class="keyword">if</span> (f)</span><br><span class="line">					&#123;</span><br><span class="line">						<span class="built_in">cout</span> &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">					&#125;</span><br><span class="line">					<span class="built_in">cout</span> &lt;&lt; j + <span class="number">1</span>;</span><br><span class="line">					<span class="keyword">for</span> (<span class="keyword">int</span> h = <span class="number">0</span>; h &lt; n; h++)</span><br><span class="line">					&#123;</span><br><span class="line">						<span class="keyword">if</span> (a[j][h] == <span class="number">1</span>)</span><br><span class="line">						&#123;</span><br><span class="line">							b[h]--;</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">					b[j] = <span class="number">-1</span>;</span><br><span class="line">					f = <span class="literal">true</span>;</span><br><span class="line">					<span class="keyword">break</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>&emsp;&emsp;希望我讲解能为你带来一点作用。</p>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/B.jpeg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -232,173 +516,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/03/30/%E7%AE%97%E6%B3%95%E2%80%94-%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/">展开全文 >></a>
-        </p>
-      
 
       
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
         
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-博客成长历程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/29/%E5%8D%9A%E5%AE%A2%E6%88%90%E9%95%BF%E5%8E%86%E7%A8%8B/">博客成长历程</a>
-    </h1>
-  
-
-        
-        <a href="/2020/02/29/%E5%8D%9A%E5%AE%A2%E6%88%90%E9%95%BF%E5%8E%86%E7%A8%8B/" class="archive-article-date">
-  	<time datetime="2020-02-29T14:15:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-29</time>
-</a>
-        
-      </header>
-<div align="center" class="post-count">
-    字数：3.3k字 | 预计阅读时长：12分钟
+      </div>
+    </span>
+  </div>
 </div>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#教程链接：<br>搭建： <a href="https://www.bilibili.com/video/av44544186?from=search&seid=3405248827658104330" target="_blank" rel="noopener">codesheep</a></p>
-<p>.md文件编辑语法：<a href="https://blog.csdn.net/renlzrz/article/details/83545521" target="_blank" rel="noopener">链接</a></p>
-        
-      
 
-      
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/03/30/%E7%AE%97%E6%B3%95%E2%80%94-%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/" alt="微信分享二维码">
     </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">博客</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/02/29/%E5%8D%9A%E5%AE%A2%E6%88%90%E9%95%BF%E5%8E%86%E7%A8%8B/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-XUJC 第1231题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/02/26/XUJC%20%E7%AC%AC1231%E9%A2%98/">XUJC 第1231题</a>
-    </h1>
-  
-
-        
-        <a href="/2020/02/26/XUJC%20%E7%AC%AC1231%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2020-02-26T03:44:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-26</time>
-</a>
-        
-      </header>
-<div align="center" class="post-count">
-    字数：685字 | 预计阅读时长：2分钟
 </div>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p><a href="http://www.xujcoj.org/Home/Problems/status/pro_id/1231" target="_blank" rel="noopener">原题链接</a></p>
-<h1 id="青蛙公主比数字"><a href="#青蛙公主比数字" class="headerlink" title="青蛙公主比数字"></a>青蛙公主比数字</h1>
-        
-      
 
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">XUJC</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/02/26/XUJC%20%E7%AC%AC1231%E9%A2%98/">展开全文 >></a>
-        </p>
-      
-
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2020/02/29/%E5%8D%9A%E5%AE%A2%E6%88%90%E9%95%BF%E5%8E%86%E7%A8%8B/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">博客成长历程</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -418,8 +604,14 @@
 
 
 
+  
+  
+  
 
   
+
+  
+
   
 
 
@@ -447,8 +639,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
