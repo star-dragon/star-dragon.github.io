@@ -6,14 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: HDU-4857 | StartD</title>
+  <title>算法——求最大公约数 | StartD</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="StartD">
-<meta property="og:url" content="http://yoursite.com/tags/HDU-4857/index.html">
+  <meta name="description" content="前言 &amp;emsp;&amp;emsp;这篇文章我将介绍两个最大公约数的算法并讲解一些题目。有错的地方，请大家多多包涵。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法——求最大公约数">
+<meta property="og:url" content="http://yoursite.com/2020/04/06/%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E6%B1%82%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0/index.html">
 <meta property="og:site_name" content="StartD">
+<meta property="og:description" content="前言 &amp;emsp;&amp;emsp;这篇文章我将介绍两个最大公约数的算法并讲解一些题目。有错的地方，请大家多多包涵。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-04-06T15:15:56.000Z">
+<meta property="article:modified_time" content="2020-04-11T08:35:06.179Z">
 <meta property="article:author" content="stardragon">
+<meta property="article:tag" content="最大公约数">
+<meta property="article:tag" content="HUD-2504">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="StartD" type="application/atom+xml">
@@ -163,76 +169,239 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-算法——求最大公约数" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/03/30/%E7%AE%97%E6%B3%95%E2%80%94-%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/" class="archive-article-date">
-  	<time datetime="2020-03-30T04:31:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-30</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/03/30/%E7%AE%97%E6%B3%95%E2%80%94-%E6%8B%93%E6%89%91%E6%8E%92%E5%BA%8F/">算法—-拓扑排序</a>
+    <h1 class="article-title" itemprop="name">
+      算法——求最大公约数
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/04/06/%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E6%B1%82%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0/" class="archive-article-date">
+  	<time datetime="2020-04-06T15:15:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-04-06</time>
+</a>
+        
+      </header>
+<div align="center" class="post-count">
+    字数：1.2k字 | 预计阅读时长：5分钟
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+<div id="busuanzi_container_page_pv" style="font - size:16px;color:rgb(153,153,153);line-height:1.8em;">
+总阅读量
+<span id="busuanzi_value_page_pv"></span>次
+</div>
+        <p><strong>前言</strong></p>
+<p>&emsp;&emsp;这篇文章我将介绍两个最大公约数的算法并讲解一些题目。有错的地方，请大家多多包涵。</p>
+<a id="more"></a>
+
+<p>[TOC]</p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>&emsp;&emsp;最大公约数（最大公因数）指的就是可以同时被整数a和b整除的最大数（<a href="https://baike.baidu.com/item/%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0/869308?fr=aladdin" target="_blank" rel="noopener">百度百科链接</a>）。用代码来求最大公约数一般用这两种思想。</p>
+<ul>
+<li><p>辗转相除法：也称欧几里德算法。</p>
+</li>
+<li><p>更相减损法：也称更向减损术。</p>
+</li>
+</ul>
+<hr>
+<h2 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h2><h3 id="辗转相除法"><a href="#辗转相除法" class="headerlink" title="辗转相除法"></a>辗转相除法</h3><p>&emsp;&emsp;设两个整数<strong>a</strong>和<strong>b</strong>（这里默认<strong>a&gt;b</strong>）。<strong>a%b</strong>得到整数<strong>c</strong>，然后<strong>a=c</strong>如果换完后<strong>a&lt;b</strong>那么<strong>a b</strong>互换后再进行上面的操作直到出现整数<strong>a</strong>被整数<strong>b</strong>整除。这时候的整数<strong>b</strong>就是最大的公约数。它的证明太复杂了，我感觉这个<a href="https://baike.baidu.com/item/%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95/1647675?fromtitle=%E8%BE%97%E8%BD%AC%E7%9B%B8%E9%99%A4%E6%B3%95&fromid=4625352&fr=aladdin" target="_blank" rel="noopener">链接</a>中的证明就很好了。所以我这里就不证明了。</p>
+<h3 id="辗转相除发的算法实现"><a href="#辗转相除发的算法实现" class="headerlink" title="辗转相除发的算法实现"></a>辗转相除发的算法实现</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> __gcd(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (a%b==<span class="number">0</span>)<span class="comment">//如果可以a可以被b整除就意味着b就是最大公约数</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> b;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		a = a % b;</span><br><span class="line">		<span class="keyword">if</span> (a&gt;b)<span class="comment">//如果a小于b那么a%b会一直为a，函数就会进行死循环</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> __gcd(a, b);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> __gcd(b, a);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在有些编译器中直接就有<strong>__gcd()</strong>这个函数，在<strong>#include<algorithm></strong>头文件中。但是我用visual&nbsp;studio&nbsp;2019就没有调出来过。 </p>
+<hr>
+<h2 id="更相减损法"><a href="#更相减损法" class="headerlink" title="更相减损法"></a>更相减损法</h2><p>&emsp;&emsp;设两个整数<strong>a</strong>和<strong>b</strong>（这里默认<strong>a&gt;b</strong>）。如果<strong>a</strong>和<strong>b</strong>都能被2整除则就把他们都除以2。然后用<strong>a</strong>减去<strong>b</strong>得到<strong>c</strong>，让<strong>c=a</strong>。接下来调换<strong>a</strong>与<strong>b</strong>的数值使得<strong>a&gt;b</strong>。最后重复上面的步骤直到<strong>c=b</strong>。如果之前没有约简则直接输出<strong>b</strong>否则要将<strong>b</strong>乘上约简的值。</p>
+<p>&emsp;比如12，4。两个都是偶数所以进行约简。一直除与2直到它们中的一个不是偶数则得到3，1。最终进行减，结果必是<strong>b</strong>=1.但是你应该要输出4<strong>*b</strong>。</p>
+<h3 id="更相减损法的算法实现"><a href="#更相减损法的算法实现" class="headerlink" title="更相减损法的算法实现"></a>更相减损法的算法实现</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> (a%<span class="number">2</span>==<span class="number">0</span>&amp;&amp;b%<span class="number">2</span>==<span class="number">0</span>)<span class="comment">//先判断是否两个都可以用2约简</span></span><br><span class="line">	&#123;</span><br><span class="line">		a = a / <span class="number">2</span>;</span><br><span class="line">		b = b / <span class="number">2</span>;</span><br><span class="line">		count = count + <span class="number">2</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span> (a!=b)<span class="comment">//一直执行a-b直到a等于b</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span> (a &lt; b)<span class="comment">//让a一定大于b</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">int</span> t = b;</span><br><span class="line">			b = a;</span><br><span class="line">			a = t;</span><br><span class="line">		&#125;</span><br><span class="line">		a = a - b;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (count==<span class="number">0</span>)<span class="comment">//因为后面要输出count*a，所以如果count=0就要让它为1</span></span><br><span class="line">	&#123;</span><br><span class="line">		count = <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> count * a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>两种算法的实现我都展示出来了，当然你也不一定要按我的写法来做。比如辗转相除法我用递归来写，你可以不用递归也能写出来。总之对于算法我们还是要先记住它的思想而不是具体的实现。</p>
+<hr>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><h3 id="HUD-2504-又见GCD"><a href="#HUD-2504-又见GCD" class="headerlink" title="HUD-2504 又见GCD"></a><a href="http://acm.hdu.edu.cn/showproblem.php?pid=2504" target="_blank" rel="noopener">HUD-2504 又见GCD</a></h3><p>Problem Description</p>
+<p>有三个正整数a,b,c(0&lt;a,b,c&lt;10^6)，其中c不等于b。若a和c的最大公约数为b，现已知a和b，求满足条件的最小的c。</p>
+<p>Input</p>
+<p>第一行输入一个n，表示有n组测试数据，接下来的n行，每行输入两个正整数a,b。</p>
+<p>Output</p>
+<p>输出对应的c，每组测试数据占一行。</p>
+<p>Sample Input</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2</span><br><span class="line">6 2</span><br><span class="line">12 4</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>Sample Output</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">4</span><br><span class="line">8</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>Source</p>
+<p><a href="http://acm.hdu.edu.cn/search.php?field=problem&key=%A1%B6ACM%B3%CC%D0%F2%C9%E8%BC%C6%A1%B7%B6%CC%D1%A7%C6%DA%BF%BC%CA%D4_%C8%ED%BC%FE%B9%A4%B3%CC%BC%B0%C6%E4%CB%FB%D7%A8%D2%B5&source=1&searchmode=source" target="_blank" rel="noopener">《ACM程序设计》短学期考试_软件工程及其他专业</a></p>
+<p>Recommend</p>
+<p>lcy  |  We have carefully selected several similar problems for you: <a href="http://acm.hdu.edu.cn/showproblem.php?pid=2502" target="_blank" rel="noopener">2502</a> <a href="http://acm.hdu.edu.cn/showproblem.php?pid=2503" target="_blank" rel="noopener">2503</a> <a href="http://acm.hdu.edu.cn/showproblem.php?pid=2500" target="_blank" rel="noopener">2500</a> <a href="http://acm.hdu.edu.cn/showproblem.php?pid=1215" target="_blank" rel="noopener">1215</a> <a href="http://acm.hdu.edu.cn/showproblem.php?pid=2501" target="_blank" rel="noopener">2501</a> </p>
+<hr>
+<p><strong>对于又见GCD的分析</strong></p>
+<p>&emsp;&emsp;本题就是让我们知道最大公约数<strong>c</strong>和一个值<strong>a</strong>然后让我们求得值<strong>b</strong>。<strong>b</strong>是满足<strong>c</strong>是<strong>a</strong>和<strong>b</strong>的最大公约数条件下的最小值且它不等于<strong>c</strong>。那么<strong>c</strong>是<strong>b</strong>的最大公约数。那么<strong>b</strong>必定是<strong>c</strong>的倍数。那么我们只要设一个整数i等于2开始进行<strong>i*c</strong>然后用求最大公约数的算法进行判断<strong>i*c</strong>和<strong>a</strong>的最大公约数是否为又见GCD。是则输出<strong>i*c</strong>否则<strong>i++</strong>。</p>
+<p><strong>AC代码</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> __gcd(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span> (a%b==<span class="number">0</span>)<span class="comment">//如果可以a可以被b整除就意味着b就是最大公约数</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> b;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		a = a % b;</span><br><span class="line">		<span class="keyword">if</span> (a&gt;b)<span class="comment">//如果a小于b那么a%b会一直为a，函数就会进行死循环</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> __gcd(a, b);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> __gcd(b, a);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a, b, c,t;</span><br><span class="line">	<span class="keyword">while</span> (<span class="built_in">cin</span>&gt;&gt;t)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">while</span> (t--)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cin</span> &gt;&gt; a &gt;&gt; c;</span><br><span class="line">			<span class="keyword">int</span> i = <span class="number">2</span>;<span class="comment">//因为c！=b且b是c的倍数，所以i从2开始就好了</span></span><br><span class="line">			<span class="keyword">while</span> (__gcd(a, i * c) != c)<span class="comment">//判断i*c是否符合条件</span></span><br><span class="line">			&#123;</span><br><span class="line">				i++;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; i * c &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（这题我使用更相减损法超时了所以我才用辗转相除法。）</p>
+<hr>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/B.jpeg">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">拓扑排序</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">最大公约数</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">HDU-2647</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">HDU-3342</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">HDU-4857</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">HDU - 5695</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">HUD-2504</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/04/06/%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E6%B1%82%E6%9C%80%E5%A4%A7%E5%85%AC%E7%BA%A6%E6%95%B0/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2020/04/05/%E5%AF%B9%E4%BA%8Eoj%E5%81%9A%E9%A2%98%E4%B8%AD%E4%BC%9A%E5%87%BA%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98%E5%88%86%E6%9E%90/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">对于oj做题中会出现的问题分析</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -260,9 +429,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
